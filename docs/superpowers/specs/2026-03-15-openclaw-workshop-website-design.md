@@ -121,7 +121,82 @@ File tree items use `<button>` elements for keyboard accessibility (Tab to navig
 - Plugin settings
 - Styled as a JSON code block with inline comment annotations highlighted in orange
 
-#### 1.5 Pitfall Guide
+#### 1.5 Deployment Methods
+
+**Content:**
+
+Three deployment paths, ordered by simplicity:
+
+1. **Zero-Barrier Cloud (Recommended for beginners)**
+   - 扣子编程 (Coze Code): no server needed, ¥49/月起, 2 steps to deploy, built-in models (Seed 2.0, DeepSeek, GLM)
+   - Railway: $5/month free tier, one-click deploy, best for international users
+
+2. **Cloud One-Click Deployment (Most popular)**
+   - Comparison table of major providers:
+     - 阿里云: 9.9元/月 (limited offer), 2C2G, built-in qwen3.5-plus, 3 steps
+     - 腾讯云: ~17元/月, 2C2G, Coding Plan models, supports WeChat/QQ/DingTalk/Feishu
+     - 火山引擎: 9.9元/月, Feishu deep integration, server+model combo 19.8元/月
+     - 百度云: 0.01元首月体验, 千帆模型平台
+     - 华为云: ~85元/月, enterprise-grade compliance
+     - Zeabur: usage-based billing, multi-model failover
+   - Key insight callout: "Server cost is NOT the main expense — model API fees are. When choosing a platform, focus on model pricing, not server pricing."
+
+3. **Mac mini Home Server (Emphasized)**
+   - Why Mac mini: always-on, low power, quiet, perfect as personal AI server
+   - Setup: `npm install -g openclaw@latest` → `openclaw onboard --install-daemon`
+   - macOS menu bar companion app: one-click start/stop Gateway, view channel status, system notifications
+   - Daemon: launchd auto-start on boot, Gateway runs at `ws://127.0.0.1:18789`
+   - Remote access via Tailscale Serve: access from phone/tablet anywhere
+   - Cost: free (only pay for model API)
+
+**Interaction:** Three deployment path cards in a horizontal row. Click any card to expand its detail panel below (accordion style). Mac mini card is visually highlighted with a subtle orange left border to indicate the recommended/featured path. Each expanded panel shows step-by-step setup with styled code blocks.
+
+#### 1.6 Model Selection
+
+**Content:**
+
+This section helps the audience understand which AI models work with OpenClaw and which ones are actually worth using. Merged with the model configuration concept from openclaw.json.
+
+1. **Model landscape overview** — OpenClaw supports 10+ model providers, from international premium to domestic budget to free local models. Key advantage: not locked into any single vendor.
+
+2. **Model comparison table** (simplified for non-technical audience):
+
+| Provider | Model | Price (Input/Output per 1M tokens) | Verdict |
+|----------|-------|------------------------------------|---------|
+| Anthropic | Claude Opus 4.6 | $5.00 / $25.00 | Recommended — strongest reasoning |
+| OpenAI | GPT-5.4 | $2.50 / $15.00 | Recommended — strong general |
+| OpenAI | Codex 5.3 | — | Recommended — best for code tasks |
+| Anthropic | Claude Sonnet 4.6 | $3.00 / $15.00 | Decent — best value among good models |
+| Google | Gemini 3 Pro | $2.00 / $12.00 | Usable — multimodal, long context |
+| DeepSeek | V3.2.2 | $0.14 / $0.28 | Cheap but limited |
+| 智谱 GLM | GLM-5 | $0.80 / $2.56 | Best domestic code model |
+| Others | Various | varies | Not practical for Agent tasks |
+
+3. **User's honest take callout** (styled as a prominent opinion box):
+   "Based on my experience, most models besides **Claude Opus 4.6**, **GPT 5.4**, and **Codex 5.3** are not very practical for real Agent tasks. Cheaper models save money but produce poor results — the effort-to-value ratio is bad. My recommendation: wait 6 months for model prices to drop before going all-in."
+
+4. **Cost optimization concept** (brief):
+   - Recommended: mixed model strategy — Sonnet for daily tasks, Opus for complex reasoning, free models (Gemini Flash / Ollama) for heartbeat and cron tasks
+   - Fallback mechanism: primary model rate-limited → auto-switch to backup
+   - Monthly cost comparison: mixed strategy ~$5-20/month vs. single premium model $100+/month
+
+5. **Configuration snippet** — annotated openclaw.json showing model configuration with primary + fallback:
+```json
+{
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "anthropic/claude-opus-4-6",
+        "fallbacks": ["anthropic/claude-sonnet-4-6", "deepseek/deepseek-chat"]
+      }
+    }
+  }
+}
+```
+
+**Interaction:** Model comparison rendered as a styled table with color-coded rows: green background for recommended models (Opus 4.6, GPT 5.4, Codex 5.3), neutral for decent/usable, light gray with reduced opacity for "not practical" models. The "user's honest take" is a distinct callout box with orange left border. Cost comparison shown as a side-by-side card (recommended vs. not recommended, matching the PDF's visual style). On scroll entry, table rows fade in sequentially top-to-bottom.
+
+#### 1.7 Pitfall Guide
 
 **Content:** Three major risks:
 1. **Security** (RED) - CVE-2026-25253 RCE vulnerability, ClawHavoc supply chain attacks on ClawHub, fundamental security design flaws
@@ -167,7 +242,7 @@ All interactive elements use the same two patterns:
 - Diagrams build progressively (1.4 memory circles)
 
 ### 2. Inline Accordion Expansion
-Used in sections 1.2 (feature cards), 1.4 (file tree detail panels), and 1.5 (warning cards). Behavior:
+Used in sections 1.2 (feature cards), 1.4 (file tree detail panels), 1.5 (deployment cards), and 1.7 (warning cards). Behavior:
 - Click a card/item header to expand content below it, pushing sibling content down
 - Click again or click a different item to collapse it (only one expanded at a time per group)
 - CSS `max-height` transition for smooth expand/collapse
@@ -187,6 +262,10 @@ body (scroll-snap-type: y mandatory)
   [Section 1.4 - natural height (~200vh), scroll-snap-align: start]
     [Two-column: sticky file tree (left 30%) | detail panel (right 70%)]
   [Section 1.5 - min-height: 100vh]
+    [Three deployment path cards with accordion expansion]
+  [Section 1.6 - min-height: 100vh]
+    [Model comparison table + cost optimization cards]
+  [Section 1.7 - min-height: 100vh]
     [Three color-coded accordion cards]
   [Section 2.1 - min-height: 100vh]
     [Split-screen comparison]

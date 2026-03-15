@@ -22,12 +22,12 @@ This project produces a single file:
 
 The file is organized internally as:
 1. `<head>` — meta tags, GSAP CDN script, `<style>` block with all CSS
-2. `<body>` — fixed nav bar + 8 `<section>` elements (one per page)
+2. `<body>` — fixed nav bar + 10 `<section>` elements (one per page)
 3. `<script>` — all JS at end of body (GSAP animations, accordion logic, file tree interactions, count-up, nav highlighting)
 
 ---
 
-## Chunk 1: Scaffold and Chapter 1 Sections
+## Chunk 1: Scaffold and Chapter 1 Sections (Tasks 1-8)
 
 ### Task 1: Base Scaffold
 
@@ -50,7 +50,7 @@ Create `index.html` with:
 - `.section` class: `min-height: 100vh; scroll-snap-align: start; padding: 80px 10% 60px;` (80px top padding for fixed nav)
 - `.section-tall` extends `.section` with `min-height: auto` (overrides `.section`'s `min-height: 100vh` so section 1.4 can grow to its natural content height while keeping `scroll-snap-align: start`)
 - `html` also needs `scroll-padding-top: 70px` for proper nav-click scroll offset
-- 8 empty `<section>` elements with ids: `s-1-1`, `s-1-2`, `s-1-3`, `s-1-4`, `s-1-5`, `s-2-1`, `s-2-2`, `s-2-3`
+- 10 empty `<section>` elements with ids: `s-1-1`, `s-1-2`, `s-1-3`, `s-1-4`, `s-1-5`, `s-1-6`, `s-1-7`, `s-2-1`, `s-2-2`, `s-2-3`
 - A fixed nav bar at top: `<nav>` with `position: fixed; top: 0; width: 100%; z-index: 100; background: rgba(250,250,248,0.95); backdrop-filter: blur(8px); border-bottom: 1px solid #eee; padding: 12px 10%;`
   - Inside nav: chapter dots/labels as `<a href="#s-1-1">` etc., styled as small circles with labels
 - Empty `<script>` block at end of body
@@ -82,6 +82,8 @@ Create `index.html` with:
     <a href="#s-1-3" class="nav-dot">1.3</a>
     <a href="#s-1-4" class="nav-dot">1.4</a>
     <a href="#s-1-5" class="nav-dot">1.5</a>
+    <a href="#s-1-6" class="nav-dot">1.6</a>
+    <a href="#s-1-7" class="nav-dot">1.7</a>
     <span class="nav-sep">|</span>
     <a href="#s-2-1" class="nav-dot">2.1</a>
     <a href="#s-2-2" class="nav-dot">2.2</a>
@@ -91,7 +93,9 @@ Create `index.html` with:
   <section id="s-1-2" class="section"><!-- 1.2 --></section>
   <section id="s-1-3" class="section"><!-- 1.3 --></section>
   <section id="s-1-4" class="section section-tall"><!-- 1.4 --></section>
-  <section id="s-1-5" class="section"><!-- 1.5 --></section>
+  <section id="s-1-5" class="section"><!-- 1.5 Deployment --></section>
+  <section id="s-1-6" class="section"><!-- 1.6 Model Selection --></section>
+  <section id="s-1-7" class="section"><!-- 1.7 Pitfalls --></section>
   <section id="s-2-1" class="section"><!-- 2.1 --></section>
   <section id="s-2-2" class="section"><!-- 2.2 --></section>
   <section id="s-2-3" class="section"><!-- 2.3 --></section>
@@ -129,7 +133,7 @@ document.querySelectorAll('section[id]').forEach(section => {
 - [ ] **Step 3: Verify and commit**
 
 Open `index.html` in browser. Confirm:
-- 8 snapping sections visible when scrolling
+- 10 snapping sections visible when scrolling
 - Nav bar stays fixed at top
 - Nav dots highlight as you scroll between sections
 
@@ -706,14 +710,283 @@ git commit -m "feat: add section 1.4 workspace with file tree and detail panels"
 
 ---
 
-### Task 6: Section 1.5 — Pitfall Guide
+### Task 6: Section 1.5 — Deployment Methods
 
 **Files:**
-- Modify: `index.html` (section `#s-1-5`)
+- Modify: `index.html` (section `#s-1-5` content + CSS + JS)
+
+- [ ] **Step 1: Add HTML for deployment section**
+
+Inside `#s-1-5`:
+
+```html
+<h2 class="section-title">部署方式</h2>
+<p class="section-subtitle">从零门槛到完全掌控，选一个适合你的。</p>
+<div class="deploy-cards">
+  <div class="deploy-card" data-deploy="cloud">
+    <div class="deploy-header" onclick="toggleDeploy(this.parentElement)">
+      <span class="deploy-icon">☁️</span>
+      <div>
+        <h3>云端一键部署</h3>
+        <p class="deploy-tagline">最受欢迎，适合大部分人</p>
+      </div>
+      <span class="card-arrow">&#9662;</span>
+    </div>
+    <div class="deploy-body">
+      <table class="deploy-table">
+        <thead><tr><th>平台</th><th>价格</th><th>难度</th><th>特色</th></tr></thead>
+        <tbody>
+          <tr><td>阿里云</td><td>9.9元/月</td><td>极低 (3步)</td><td>国内首选，内置 qwen3.5</td></tr>
+          <tr><td>腾讯云</td><td>~17元/月</td><td>极低 (3步)</td><td>微信/QQ/钉钉/飞书全覆盖</td></tr>
+          <tr><td>火山引擎</td><td>9.9元/月</td><td>低 (3步)</td><td>飞书深度集成，组合套餐 19.8元</td></tr>
+          <tr><td>百度云</td><td>0.01元首月</td><td>极低 (4步)</td><td>千帆模型平台</td></tr>
+          <tr><td>扣子编程</td><td>¥49/月起</td><td>极低 (2步)</td><td>零门槛，无需服务器</td></tr>
+        </tbody>
+      </table>
+      <div class="deploy-callout">
+        <strong>核心提醒：</strong>服务器成本不是大头 (9.9~99元/年)。<strong>模型 API 费用才是真正的持续成本。</strong>选平台时重点看模型套餐价格。
+      </div>
+    </div>
+  </div>
+  <div class="deploy-card deploy-featured" data-deploy="mac">
+    <div class="deploy-header" onclick="toggleDeploy(this.parentElement)">
+      <span class="deploy-icon">🖥️</span>
+      <div>
+        <h3>Mac mini 家庭服务器</h3>
+        <p class="deploy-tagline">推荐 — 完全掌控，长期在线</p>
+      </div>
+      <span class="card-arrow">&#9662;</span>
+    </div>
+    <div class="deploy-body">
+      <div class="deploy-steps">
+        <div class="deploy-step"><span class="step-num">1</span>安装：<code>npm install -g openclaw@latest</code></div>
+        <div class="deploy-step"><span class="step-num">2</span>初始化：<code>openclaw onboard --install-daemon</code></div>
+        <div class="deploy-step"><span class="step-num">3</span>菜单栏应用：一键启停 Gateway，查看 channel 状态，系统通知</div>
+        <div class="deploy-step"><span class="step-num">4</span>远程访问：Tailscale Serve，手机/平板随时随地使用</div>
+      </div>
+      <p class="deploy-note">Mac mini 低功耗、安静、常开，是完美的个人 AI 服务器。launchd 守护进程确保开机自动运行。成本：仅 API 费用。</p>
+    </div>
+  </div>
+  <div class="deploy-card" data-deploy="zero">
+    <div class="deploy-header" onclick="toggleDeploy(this.parentElement)">
+      <span class="deploy-icon">🚀</span>
+      <div>
+        <h3>零门槛方案</h3>
+        <p class="deploy-tagline">不想管服务器？也可以</p>
+      </div>
+      <span class="card-arrow">&#9662;</span>
+    </div>
+    <div class="deploy-body">
+      <p><strong>扣子编程 (Coze Code)</strong>：完全在平台上运行，¥49/月起。内置模型、联网搜索、生图 Skill 全部配好，2 步完成部署。</p>
+      <p style="margin-top:12px"><strong>Railway</strong>：$5/月免费额度，一键部署，适合海外用户和开发者。</p>
+    </div>
+  </div>
+</div>
+```
+
+- [ ] **Step 2: Add CSS for deployment cards**
+
+```css
+.deploy-cards { max-width: 750px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px; }
+.deploy-card { background: white; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); overflow: hidden; }
+.deploy-featured { border-left: 4px solid var(--orange-start); }
+.deploy-header { display: flex; align-items: center; gap: 16px; padding: 20px 24px; cursor: pointer; user-select: none; }
+.deploy-header h3 { font-size: 1.15rem; font-weight: 700; }
+.deploy-header > div { flex: 1; }
+.deploy-tagline { font-size: 0.85rem; color: var(--text-secondary); margin-top: 2px; }
+.deploy-icon { font-size: 1.8rem; }
+.deploy-body { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.4s ease; padding: 0 24px; }
+.deploy-card.expanded .deploy-body { max-height: 600px; padding: 0 24px 24px; }
+.deploy-card.expanded .card-arrow { transform: rotate(180deg); }
+.deploy-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin-bottom: 16px; }
+.deploy-table th { text-align: left; padding: 8px 12px; background: #f9f9f7; font-weight: 600; border-bottom: 2px solid #eee; }
+.deploy-table td { padding: 8px 12px; border-bottom: 1px solid #f0f0f0; color: var(--text-secondary); }
+.deploy-callout { background: rgba(232,82,14,0.06); border-left: 3px solid var(--orange-start); padding: 12px 16px; border-radius: 0 8px 8px 0; font-size: 0.9rem; line-height: 1.6; color: var(--text); }
+.deploy-steps { display: flex; flex-direction: column; gap: 12px; margin-bottom: 16px; }
+.deploy-step { display: flex; align-items: baseline; gap: 12px; font-size: 0.9rem; color: var(--text-secondary); line-height: 1.5; }
+.deploy-step code { background: var(--code-bg); padding: 2px 8px; border-radius: 4px; font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.8rem; }
+.step-num { display: inline-flex; align-items: center; justify-content: center; min-width: 24px; height: 24px; background: var(--orange-start); color: white; border-radius: 50%; font-size: 0.75rem; font-weight: 700; }
+.deploy-note { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; }
+```
+
+- [ ] **Step 3: Add JS for deploy accordion and entrance animation**
+
+```js
+function toggleDeploy(card) {
+  const stack = card.parentElement;
+  const wasExpanded = card.classList.contains('expanded');
+  stack.querySelectorAll('.deploy-card.expanded').forEach(c => c.classList.remove('expanded'));
+  if (!wasExpanded) card.classList.add('expanded');
+}
+
+gsap.utils.toArray('.deploy-card').forEach((card, i) => {
+  gsap.from(card, {
+    scrollTrigger: { trigger: card, start: 'top 85%', once: true },
+    opacity: 0, y: 30, duration: 0.5, delay: i * 0.12, ease: 'power2.out'
+  });
+});
+```
+
+- [ ] **Step 4: Verify and commit**
+
+Open in browser. Scroll to 1.5. Confirm: three deployment cards animate in, Mac mini card has orange left border highlight, accordion works, table renders in cloud card.
+
+```bash
+git add index.html
+git commit -m "feat: add section 1.5 deployment methods with cloud/Mac mini/zero-barrier cards"
+```
+
+---
+
+### Task 7: Section 1.6 — Model Selection
+
+**Files:**
+- Modify: `index.html` (section `#s-1-6` content + CSS + JS)
+
+- [ ] **Step 1: Add HTML for model selection section**
+
+Inside `#s-1-6`:
+
+```html
+<h2 class="section-title">模型选择</h2>
+<p class="section-subtitle">OpenClaw 支持 10+ 模型厂商，但不是每个都值得用。</p>
+<div class="model-section">
+  <table class="model-table">
+    <thead>
+      <tr><th>厂商</th><th>模型</th><th>价格 (输入/输出 /1M tokens)</th><th>评价</th></tr>
+    </thead>
+    <tbody>
+      <tr class="model-recommended"><td>Anthropic</td><td>Claude Opus 4.6</td><td>$5.00 / $25.00</td><td><span class="model-badge badge-green">推荐</span>最强推理</td></tr>
+      <tr class="model-recommended"><td>OpenAI</td><td>GPT-5.4</td><td>$2.50 / $15.00</td><td><span class="model-badge badge-green">推荐</span>通用能力强</td></tr>
+      <tr class="model-recommended"><td>OpenAI</td><td>Codex 5.3</td><td>—</td><td><span class="model-badge badge-green">推荐</span>代码任务最佳</td></tr>
+      <tr class="model-decent"><td>Anthropic</td><td>Claude Sonnet 4.6</td><td>$3.00 / $15.00</td><td><span class="model-badge badge-gray">可用</span>性价比之选</td></tr>
+      <tr class="model-decent"><td>Google</td><td>Gemini 3 Pro</td><td>$2.00 / $12.00</td><td><span class="model-badge badge-gray">可用</span>多模态、长上下文</td></tr>
+      <tr class="model-weak"><td>DeepSeek</td><td>V3.2.2</td><td>$0.14 / $0.28</td><td>极致低价，效果有限</td></tr>
+      <tr class="model-weak"><td>智谱 GLM</td><td>GLM-5</td><td>$0.80 / $2.56</td><td>国产最强代码能力</td></tr>
+      <tr class="model-weak"><td>Kimi</td><td>K2.5</td><td>$0.60 / $3.00</td><td>中文长上下文</td></tr>
+      <tr class="model-weak"><td>MiniMax</td><td>M2.5</td><td>$0.50 / $2.00</td><td>SWE-bench 高分</td></tr>
+      <tr class="model-weak"><td>Ollama</td><td>本地模型</td><td>免费</td><td>隐私敏感、零成本</td></tr>
+    </tbody>
+  </table>
+
+  <div class="model-opinion">
+    <div class="opinion-icon">💡</div>
+    <div class="opinion-text">
+      <strong>我的经验：</strong>大部分模型除了 <strong>Claude Opus 4.6</strong>、<strong>GPT 5.4</strong> 和 <strong>Codex 5.3</strong> 之外，做 Agent 任务都不大实用。便宜模型省了钱但费了精力 —— 性价比其实很低。<br>建议：等半年，模型价格降下来再全力投入。
+    </div>
+  </div>
+
+  <h3 class="subsection-title">成本优化</h3>
+  <div class="cost-compare">
+    <div class="cost-card cost-good">
+      <div class="cost-label">✅ 混合模型策略（推荐）</div>
+      <ul>
+        <li>主力：Claude Sonnet (日常)</li>
+        <li>复杂任务：升级 Opus</li>
+        <li>心跳/定时：Gemini Flash (免费)</li>
+        <li>Fallback：Sonnet → Haiku → DeepSeek</li>
+      </ul>
+      <div class="cost-price">~$5-20/月</div>
+    </div>
+    <div class="cost-card cost-bad">
+      <div class="cost-label">❌ 单一贵价模型</div>
+      <ul>
+        <li>所有任务都用 Claude Opus</li>
+        <li>不设预算上限</li>
+        <li>不配 Fallback</li>
+        <li>cron 任务高频运行</li>
+      </ul>
+      <div class="cost-price">$100-1,000+/月</div>
+    </div>
+  </div>
+
+  <pre class="code-block"><code><span class="code-comment">// openclaw.json 模型配置示例</span>
+{
+  <span class="code-key">"agents"</span>: {
+    <span class="code-key">"defaults"</span>: {
+      <span class="code-key">"model"</span>: {
+        <span class="code-key">"primary"</span>: <span class="code-str">"anthropic/claude-opus-4-6"</span>,      <span class="code-comment">// 主力模型</span>
+        <span class="code-key">"fallbacks"</span>: [<span class="code-str">"anthropic/claude-sonnet-4-6"</span>, <span class="code-str">"deepseek/deepseek-chat"</span>]  <span class="code-comment">// 备选链</span>
+      }
+    }
+  }
+}</code></pre>
+</div>
+```
+
+- [ ] **Step 2: Add CSS for model section**
+
+```css
+.model-section { max-width: 850px; margin: 0 auto; }
+.model-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin-bottom: 32px; }
+.model-table th { text-align: left; padding: 10px 14px; background: #f9f9f7; font-weight: 600; border-bottom: 2px solid #eee; }
+.model-table td { padding: 10px 14px; border-bottom: 1px solid #f0f0f0; }
+.model-recommended { background: rgba(56,161,105,0.06); }
+.model-decent { background: white; }
+.model-weak { background: white; opacity: 0.6; }
+.model-badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 0.7rem; font-weight: 600; margin-right: 6px; }
+.badge-green { background: #C6F6D5; color: #22543D; }
+.badge-gray { background: #E2E8F0; color: #4A5568; }
+.model-opinion { display: flex; gap: 16px; padding: 20px 24px; background: rgba(232,82,14,0.06); border-left: 4px solid var(--orange-start); border-radius: 0 12px 12px 0; margin-bottom: 32px; }
+.opinion-icon { font-size: 1.5rem; }
+.opinion-text { font-size: 0.95rem; line-height: 1.7; color: var(--text); }
+.subsection-title { font-size: 1.3rem; font-weight: 700; margin-bottom: 16px; }
+.cost-compare { display: flex; gap: 20px; margin-bottom: 32px; }
+.cost-card { flex: 1; padding: 24px; border-radius: 12px; }
+.cost-good { background: #F0FFF4; border: 1px solid #C6F6D5; }
+.cost-bad { background: #FFF5F5; border: 1px solid #FED7D7; }
+.cost-label { font-weight: 700; font-size: 1rem; margin-bottom: 12px; }
+.cost-card ul { list-style: none; padding: 0; margin: 0; }
+.cost-card li { padding: 4px 0; color: var(--text-secondary); font-size: 0.9rem; }
+.cost-price { margin-top: 16px; font-size: 1.5rem; font-weight: 800; color: var(--orange-start); }
+.cost-bad .cost-price { color: var(--red); }
+```
+
+- [ ] **Step 3: Add GSAP entrance animations**
+
+```js
+// Model table rows fade in sequentially
+gsap.utils.toArray('.model-table tbody tr').forEach((row, i) => {
+  gsap.from(row, {
+    scrollTrigger: { trigger: row, start: 'top 90%', once: true },
+    opacity: 0, y: 15, duration: 0.3, delay: i * 0.06, ease: 'power2.out'
+  });
+});
+
+gsap.from('.model-opinion', {
+  scrollTrigger: { trigger: '.model-opinion', start: 'top 80%', once: true },
+  opacity: 0, x: -30, duration: 0.5, ease: 'power2.out'
+});
+
+gsap.from('.cost-good', {
+  scrollTrigger: { trigger: '.cost-compare', start: 'top 80%', once: true },
+  opacity: 0, x: -40, duration: 0.5, ease: 'power2.out'
+});
+gsap.from('.cost-bad', {
+  scrollTrigger: { trigger: '.cost-compare', start: 'top 80%', once: true },
+  opacity: 0, x: 40, duration: 0.5, delay: 0.15, ease: 'power2.out'
+});
+```
+
+- [ ] **Step 4: Verify and commit**
+
+Open in browser. Scroll to 1.6. Confirm: model table renders with green-highlighted recommended rows, dimmed "not practical" rows, opinion callout box, cost comparison cards slide in, config code block displays.
+
+```bash
+git add index.html
+git commit -m "feat: add section 1.6 model selection with comparison table and cost optimization"
+```
+
+---
+
+### Task 8: Section 1.7 — Pitfall Guide
+
+**Files:**
+- Modify: `index.html` (section `#s-1-7`)
 
 - [ ] **Step 1: Add HTML for three warning cards**
 
-Inside `#s-1-5`:
+Inside `#s-1-7`:
 
 ```html
 <h2 class="section-title">避坑指南</h2>
@@ -808,18 +1081,18 @@ gsap.utils.toArray('.warning-card').forEach((card, i) => {
 
 - [ ] **Step 4: Verify and commit**
 
-Open in browser. Scroll to 1.5. Confirm: three color-coded cards animate in, click to expand, accordion behavior (one at a time).
+Open in browser. Scroll to 1.7. Confirm: three color-coded cards animate in, click to expand, accordion behavior (one at a time).
 
 ```bash
 git add index.html
-git commit -m "feat: add section 1.5 pitfall guide with warning cards"
+git commit -m "feat: add section 1.7 pitfall guide with warning cards"
 ```
 
 ---
 
-## Chunk 2: Chapter 2 Sections and Polish
+## Chunk 2: Chapter 2 Sections and Polish (Tasks 9-11)
 
-### Task 7: Section 2.1 — File over System
+### Task 9: Section 2.1 — File over System
 
 **Files:**
 - Modify: `index.html` (section `#s-2-1`)
@@ -896,7 +1169,7 @@ git commit -m "feat: add section 2.1 file over system comparison"
 
 ---
 
-### Task 8: Sections 2.2 & 2.3 — Prompt and Skill Methodology
+### Task 10: Sections 2.2 & 2.3 — Prompt and Skill Methodology
 
 **Files:**
 - Modify: `index.html` (sections `#s-2-2` and `#s-2-3`)
@@ -1078,7 +1351,7 @@ git commit -m "feat: add sections 2.2 prompt and 2.3 skill methodology"
 
 ---
 
-### Task 9: Final Polish
+### Task 11: Final Polish
 
 **Files:**
 - Modify: `index.html` (CSS and JS refinements)
@@ -1103,6 +1376,8 @@ git commit -m "feat: add sections 2.2 prompt and 2.3 skill methodology"
   .detail-area { width: 100%; }
   .use-case, .use-case:nth-child(even) { flex-direction: column; }
   .skill-anatomy { flex-direction: column; }
+  .cost-compare { flex-direction: column; }
+  .deploy-table { font-size: 0.75rem; }
 }
 ```
 
@@ -1117,16 +1392,18 @@ html { scroll-padding-top: 70px; }
 
 - [ ] **Step 3: Verify full website end-to-end**
 
-Open `index.html` in browser. Walk through all 8 sections:
+Open `index.html` in browser. Walk through all 10 sections:
 - [ ] 1.1: Title renders, stats count up
 - [ ] 1.2: Three cards animate in, accordion works
 - [ ] 1.3: Use cases slide in from alternating sides
 - [ ] 1.4: File tree sticky, panels switch, memory circles animate, timeline renders
-- [ ] 1.5: Warning cards with color coding, accordion works
+- [ ] 1.5: Deployment cards with accordion, Mac mini card highlighted, cloud table renders
+- [ ] 1.6: Model table with color-coded rows, opinion callout, cost comparison cards
+- [ ] 1.7: Warning cards with color coding, accordion works
 - [ ] 2.1: Split comparison slides in
 - [ ] 2.2: Prompt principles animate in with before/after examples
 - [ ] 2.3: Skill code + annotations side by side
-- [ ] Nav bar: dots highlight correctly per section
+- [ ] Nav bar: dots highlight correctly per section (10 dots)
 - [ ] Scroll-snap: snaps at chapter boundaries
 
 - [ ] **Step 4: Commit final polish**
