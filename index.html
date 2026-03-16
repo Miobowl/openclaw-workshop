@@ -437,6 +437,27 @@
       .arch-node-context { width: 100px; height: 100px; font-size: 1rem; }
       .arch-panel { min-width: 160px; }
     }
+
+    /* Part 3: Recommended Tools */
+    .tool-section { max-width: 1000px; margin: 0 auto; width: 100%; }
+    .tool-category { margin-bottom: 40px; }
+    .tool-category:last-child { margin-bottom: 0; }
+    .tool-category-header { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
+    .tool-category-icon { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 10px; background: rgba(232,82,14,0.08); color: var(--orange-start); flex-shrink: 0; }
+    .tool-category-name { font-size: 1.2rem; font-weight: 700; }
+    .tool-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; }
+    .tool-card { background: white; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); padding: 20px; display: flex; flex-direction: column; gap: 8px; text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s; cursor: pointer; }
+    .tool-card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.1); }
+    .tool-card-top { display: flex; align-items: center; gap: 10px; }
+    .tool-card-icon { display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 8px; font-size: 0.75rem; font-weight: 700; flex-shrink: 0; }
+    .tool-card-name { font-size: 1rem; font-weight: 700; }
+    .tool-card-desc { font-size: 0.8rem; color: var(--text-secondary); line-height: 1.5; flex: 1; }
+    .tool-card-link { font-size: 0.7rem; color: var(--orange-start); display: flex; align-items: center; gap: 4px; margin-top: auto; }
+    .tci-kb { background: rgba(232,82,14,0.1); color: var(--orange-start); }
+    .tci-tool { background: rgba(49,130,206,0.1); color: var(--blue); }
+    @media (max-width: 768px) {
+      .tool-grid { grid-template-columns: repeat(2, 1fr); }
+    }
   </style>
 </head>
 <body>
@@ -454,6 +475,8 @@
     <a href="#s-2-1" class="nav-dot">2.1</a>
     <a href="#s-2-2" class="nav-dot">2.2</a>
     <a href="#s-2-3" class="nav-dot">2.3</a>
+    <span class="nav-sep">|</span>
+    <a href="#s-3-1" class="nav-dot">3.1</a>
   </nav>
 
   <section id="s-1-1" class="section">
@@ -1099,6 +1122,168 @@
     </div>
   </section>
 
+  <section id="s-3-1" class="section section-tall">
+    <h2 class="section-title">推荐工具箱</h2>
+    <p class="section-subtitle">构建你的 AI 时代工作流，从这些工具开始。</p>
+    <div class="tool-section">
+
+      <div class="tool-category">
+        <div class="tool-category-header">
+          <div class="tool-category-icon"><i data-lucide="brain"></i></div>
+          <span class="tool-category-name">个人知识库 & Agent</span>
+        </div>
+        <div class="tool-grid">
+          <a href="https://www.notion.com" target="_blank" rel="noopener" class="tool-card">
+            <div class="tool-card-top">
+              <div class="tool-card-icon tci-kb">N</div>
+              <span class="tool-card-name">Notion</span>
+            </div>
+            <span class="tool-card-desc">All-in-one AI 工作空间，笔记、任务、Wiki 一体化</span>
+            <span class="tool-card-link"><i data-lucide="external-link" style="width:12px;height:12px"></i> notion.com</span>
+          </a>
+          <a href="https://obsidian.md" target="_blank" rel="noopener" class="tool-card">
+            <div class="tool-card-top">
+              <div class="tool-card-icon tci-kb">O</div>
+              <span class="tool-card-name">Obsidian</span>
+            </div>
+            <span class="tool-card-desc">本地优先的 Markdown 知识库，双链笔记 + 可视化图谱</span>
+            <span class="tool-card-link"><i data-lucide="external-link" style="width:12px;height:12px"></i> obsidian.md</span>
+          </a>
+          <a href="https://heptabase.com" target="_blank" rel="noopener" class="tool-card">
+            <div class="tool-card-top">
+              <div class="tool-card-icon tci-kb">H</div>
+              <span class="tool-card-name">Heptabase</span>
+            </div>
+            <span class="tool-card-desc">面向学习者和研究者的可视化知识管理工具</span>
+            <span class="tool-card-link"><i data-lucide="external-link" style="width:12px;height:12px"></i> heptabase.com</span>
+          </a>
+          <a href="https://tana.inc" target="_blank" rel="noopener" class="tool-card">
+            <div class="tool-card-top">
+              <div class="tool-card-icon tci-kb">T</div>
+              <span class="tool-card-name">Tana</span>
+            </div>
+            <span class="tool-card-desc">AI 原生知识图谱工作空间，Supertags + 大纲编辑器</span>
+            <span class="tool-card-link"><i data-lucide="external-link" style="width:12px;height:12px"></i> tana.inc</span>
+          </a>
+          <a href="https://manus.im" target="_blank" rel="noopener" class="tool-card">
+            <div class="tool-card-top">
+              <div class="tool-card-icon tci-kb">M</div>
+              <span class="tool-card-name">Manus</span>
+            </div>
+            <span class="tool-card-desc">AI Agent 平台，自主规划执行复杂任务</span>
+            <span class="tool-card-link"><i data-lucide="external-link" style="width:12px;height:12px"></i> manus.im</span>
+          </a>
+          <a href="https://youmind.com" target="_blank" rel="noopener" class="tool-card">
+            <div class="tool-card-top">
+              <div class="tool-card-icon tci-kb">Y</div>
+              <span class="tool-card-name">YouMind</span>
+            </div>
+            <span class="tool-card-desc">AI 创作 Agent，多模态素材转化为创作内容</span>
+            <span class="tool-card-link"><i data-lucide="external-link" style="width:12px;height:12px"></i> youmind.com</span>
+          </a>
+          <a href="https://notebooklm.google.com" target="_blank" rel="noopener" class="tool-card">
+            <div class="tool-card-top">
+              <div class="tool-card-icon tci-kb">NL</div>
+              <span class="tool-card-name">NotebookLM</span>
+            </div>
+            <span class="tool-card-desc">Google 出品，基于你的资料生成摘要和 AI 播客</span>
+            <span class="tool-card-link"><i data-lucide="external-link" style="width:12px;height:12px"></i> notebooklm.google.com</span>
+          </a>
+          <a href="https://www.codebuddy.cn/work/" target="_blank" rel="noopener" class="tool-card">
+            <div class="tool-card-top">
+              <div class="tool-card-icon tci-kb">W</div>
+              <span class="tool-card-name">WorkBuddy</span>
+            </div>
+            <span class="tool-card-desc">腾讯 AI 桌面智能体工作台，兼容 OpenClaw</span>
+            <span class="tool-card-link"><i data-lucide="external-link" style="width:12px;height:12px"></i> codebuddy.cn/work</span>
+          </a>
+          <a href="https://www.anthropic.com/claude-code" target="_blank" rel="noopener" class="tool-card">
+            <div class="tool-card-top">
+              <div class="tool-card-icon tci-kb">CC</div>
+              <span class="tool-card-name">Claude Code</span>
+            </div>
+            <span class="tool-card-desc">Anthropic AI 编程 Agent，终端内理解代码库并执行</span>
+            <span class="tool-card-link"><i data-lucide="external-link" style="width:12px;height:12px"></i> anthropic.com/claude-code</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="tool-category">
+        <div class="tool-category-header">
+          <div class="tool-category-icon" style="background:rgba(49,130,206,0.1);color:var(--blue)"><i data-lucide="wrench"></i></div>
+          <span class="tool-category-name">效率工具</span>
+        </div>
+        <div class="tool-grid">
+          <a href="https://code.visualstudio.com" target="_blank" rel="noopener" class="tool-card">
+            <div class="tool-card-top">
+              <div class="tool-card-icon tci-tool">VS</div>
+              <span class="tool-card-name">VSCode</span>
+            </div>
+            <span class="tool-card-desc">开源代码编辑器，支持 GitHub Copilot 等 AI 插件</span>
+            <span class="tool-card-link"><i data-lucide="external-link" style="width:12px;height:12px"></i> code.visualstudio.com</span>
+          </a>
+          <a href="https://www.drawio.com" target="_blank" rel="noopener" class="tool-card">
+            <div class="tool-card-top">
+              <div class="tool-card-icon tci-tool">D</div>
+              <span class="tool-card-name">Draw.io</span>
+            </div>
+            <span class="tool-card-desc">免费在线绘图工具，流程图、UML、架构图</span>
+            <span class="tool-card-link"><i data-lucide="external-link" style="width:12px;height:12px"></i> drawio.com</span>
+          </a>
+          <a href="https://shandianshuo.cn" target="_blank" rel="noopener" class="tool-card">
+            <div class="tool-card-top">
+              <div class="tool-card-icon tci-tool">&#x26A1;</div>
+              <span class="tool-card-name">闪电说</span>
+            </div>
+            <span class="tool-card-desc">端侧 AI 语音输入法，离线识别延迟约 0.2 秒，免费</span>
+            <span class="tool-card-link"><i data-lucide="external-link" style="width:12px;height:12px"></i> shandianshuo.cn</span>
+          </a>
+          <a href="https://www.typeless.com" target="_blank" rel="noopener" class="tool-card">
+            <div class="tool-card-top">
+              <div class="tool-card-icon tci-tool">TL</div>
+              <span class="tool-card-name">Typeless</span>
+            </div>
+            <span class="tool-card-desc">AI 语音输入，实时转润色文本，支持 100+ 语言</span>
+            <span class="tool-card-link"><i data-lucide="external-link" style="width:12px;height:12px"></i> typeless.com</span>
+          </a>
+          <a href="https://ideashell.ai" target="_blank" rel="noopener" class="tool-card">
+            <div class="tool-card-top">
+              <div class="tool-card-icon tci-tool">&#x1F41A;</div>
+              <span class="tool-card-name">闪念贝壳</span>
+            </div>
+            <span class="tool-card-desc">AI 语音笔记，快速记录灵感，自动整理总结</span>
+            <span class="tool-card-link"><i data-lucide="external-link" style="width:12px;height:12px"></i> ideashell.ai</span>
+          </a>
+          <a href="https://listenhub.ai" target="_blank" rel="noopener" class="tool-card">
+            <div class="tool-card-top">
+              <div class="tool-card-icon tci-tool">LH</div>
+              <span class="tool-card-name">ListenHub</span>
+            </div>
+            <span class="tool-card-desc">AI 播客生成器，输入话题即可生成播客音频</span>
+            <span class="tool-card-link"><i data-lucide="external-link" style="width:12px;height:12px"></i> listenhub.ai</span>
+          </a>
+          <a href="https://dida365.com" target="_blank" rel="noopener" class="tool-card">
+            <div class="tool-card-top">
+              <div class="tool-card-icon tci-tool">&#x2713;</div>
+              <span class="tool-card-name">滴答清单</span>
+            </div>
+            <span class="tool-card-desc">全能效率 App，任务管理、日历、习惯打卡、番茄钟</span>
+            <span class="tool-card-link"><i data-lucide="external-link" style="width:12px;height:12px"></i> dida365.com</span>
+          </a>
+          <a href="https://podwise.ai" target="_blank" rel="noopener" class="tool-card">
+            <div class="tool-card-top">
+              <div class="tool-card-icon tci-tool">P</div>
+              <span class="tool-card-name">Podwise</span>
+            </div>
+            <span class="tool-card-desc">AI 播客学习平台，摘要、转录、思维导图一键生成</span>
+            <span class="tool-card-link"><i data-lucide="external-link" style="width:12px;height:12px"></i> podwise.ai</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
   <noscript><p style="text-align:center;padding:40px;">This presentation works best with JavaScript enabled for animations. Content is still readable without it.</p></noscript>
 
   <script>
@@ -1315,6 +1500,14 @@
         document.querySelectorAll('.arch-node').forEach(n => n.classList.remove('active'));
         document.querySelectorAll('.arch-panel').forEach(p => p.classList.remove('visible'));
       }
+    });
+
+    // Part 3: Tool cards stagger animation
+    gsap.utils.toArray('.tool-card').forEach((card, i) => {
+      gsap.from(card, {
+        scrollTrigger: { trigger: card, start: 'top 90%', once: true },
+        opacity: 0, y: 25, duration: 0.4, delay: (i % 4) * 0.08, ease: 'power2.out'
+      });
     });
 
     // Initialize Lucide icons
